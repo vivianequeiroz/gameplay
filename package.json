@@ -12,7 +12,11 @@
     "dependencies": {
         "@react-native-community/eslint-config": "^3.0.2",
         "expo": "~45.0.0",
+        "expo-dev-client": "~0.9.5",
         "expo-status-bar": "~1.3.0",
+        "husky": "^8.0.1",
+        "install": "^0.13.0",
+        "pretty-quick": "^3.1.3",
         "react": "17.0.2",
         "react-dom": "17.0.2",
         "react-native": "0.68.2",
@@ -31,6 +35,11 @@
         "eslint-plugin-react": "^7.29.4",
         "prettier": "^2.6.2",
         "typescript": "~4.3.5"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "pretty-quick --staged && npm run lint"
+        }
     },
     "private": true,
     "extends": "@react-native-community"
