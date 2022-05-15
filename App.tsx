@@ -7,6 +7,7 @@ import {
 } from '@expo-google-fonts/rajdhani';
 import AppLoading from 'expo-app-loading';
 import { SignIn } from './src/screens/SignIn';
+import { StatusBar } from 'react-native';
 
 export default function App(): JSX.Element {
     const [fontsLoaded] = useFonts({
@@ -19,5 +20,14 @@ export default function App(): JSX.Element {
     if (!fontsLoaded) {
         return <AppLoading />;
     }
-    return <SignIn />;
+    return (
+        <>
+            <StatusBar
+                barStyle="light-content"
+                backgroundColor="transparent"
+                translucent
+            />
+            <SignIn />
+        </>
+    );
 }
