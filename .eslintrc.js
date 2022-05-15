@@ -18,6 +18,7 @@ module.exports = {
             1,
             { extensions: ['.js', '.jsx', '.ts', '.tsx'] }
         ], //should add ".ts" if typescript project
+        'react-native/no-inline-styles': 'off',
         'import/no-unresolved': [0, { commonjs: true, amd: true }],
         'import/named': 0,
         'import/no-named-as-default': 0,
