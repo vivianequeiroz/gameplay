@@ -15,7 +15,7 @@ export function Background({ children }: Props): JSX.Element {
             style={styles.container}
             colors={[secondary80, secondary100]}
         >
-            {children}
+            <>{children}</>
         </LinearGradient>
     );
 }
