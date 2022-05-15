@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import * as Font from 'expo-font';
 import { Inter_400Regular, Inter_500Medium } from '@expo-google-fonts/inter';
 import {
@@ -8,36 +8,48 @@ import {
 
 import * as SplashScreen from 'expo-splash-screen';
 import { Home } from './src/screens/Home';
-import { StatusBar } from 'react-native';
+import { StatusBar, View } from 'react-native';
 import { Background } from './src/components/Background';
 
 export default function App(): JSX.Element {
-    async function loadFonts() {
-        try {
-            await Font.loadAsync({
-                Inter_400Regular,
-                Inter_500Medium,
-                Rajdhani_500Medium,
-                Rajdhani_700Bold
-            });
+    const [appIsReady, setAppIsReady] = useState(false);
+    useEffect(() => {
+        async function loadFonts() {
+            try {
+                await SplashScreen.preventAutoHideAsync();
+                await Font.loadAsync({
+                    Inter_400Regular,
+                    Inter_500Medium,
+                    Rajdhani_500Medium,
+                    Rajdhani_700Bold
+                });
 
-            await SplashScreen.preventAutoHideAsync();
-        } catch (error) {
-            console.warn('Error downloading the fonts', error);
-        } finally {
-            SplashScreen.hideAsync();
+                await SplashScreen.preventAutoHideAsync();
+            } catch (error) {
+                console.warn('Error downloading the fonts', error);
+            } finally {
+                setAppIsReady(true);
+            }
         }
-    }
-    loadFonts();
+        loadFonts();
+    }, []);
+
+    const onLayoutRootView = useCallback(async () => {
+        if (appIsReady) {
+            await SplashScreen.hideAsync();
+        }
+    }, [appIsReady]);
 
     return (
-        <Background>
-            <StatusBar
-                barStyle="light-content"
-                backgroundColor="transparent"
-                translucent
-            />
-            <Home />
-        </Background>
+        <View onLayout={onLayoutRootView}>
+            <Background>
+                <StatusBar
+                    barStyle="light-content"
+                    backgroundColor="transparent"
+                    translucent
+                />
+                <Home />
+            </Background>
+        </View>
     );
 }
