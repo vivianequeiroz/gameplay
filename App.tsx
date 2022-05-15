@@ -1,26 +1,35 @@
 import React from 'react';
-import { useFonts } from 'expo-font';
+import * as Font from 'expo-font';
 import { Inter_400Regular, Inter_500Medium } from '@expo-google-fonts/inter';
 import {
     Rajdhani_500Medium,
     Rajdhani_700Bold
 } from '@expo-google-fonts/rajdhani';
-import AppLoading from 'expo-app-loading';
-import { SignIn } from './src/screens/SignIn';
+
+import * as SplashScreen from 'expo-splash-screen';
+import { Home } from './src/screens/Home';
 import { StatusBar } from 'react-native';
 import { Background } from './src/components/Background';
 
 export default function App(): JSX.Element {
-    const [fontsLoaded] = useFonts({
-        Inter_400Regular,
-        Inter_500Medium,
-        Rajdhani_500Medium,
-        Rajdhani_700Bold
-    });
+    async function loadFonts() {
+        try {
+            await Font.loadAsync({
+                Inter_400Regular,
+                Inter_500Medium,
+                Rajdhani_500Medium,
+                Rajdhani_700Bold
+            });
 
-    if (!fontsLoaded) {
-        return <AppLoading />;
+            await SplashScreen.preventAutoHideAsync();
+        } catch (error) {
+            console.warn('Error downloading the fonts', error);
+        } finally {
+            SplashScreen.hideAsync();
+        }
     }
+    loadFonts();
+
     return (
         <Background>
             <StatusBar
@@ -28,7 +37,7 @@ export default function App(): JSX.Element {
                 backgroundColor="transparent"
                 translucent
             />
-            <SignIn />
+            <Home />
         </Background>
     );
 }
