@@ -25,6 +25,7 @@ module.exports = {
         'import/no-named-as-default-member': 0,
         'import/namespace': 0,
         'import/default': 0,
-        'import/export': 0
+        'import/export': 0,
+        'import/no-extranous': 'off'
     }
 };
