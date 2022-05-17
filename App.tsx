@@ -1,37 +1,40 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import * as Font from 'expo-font';
+import { StatusBar, View } from 'react-native';
+
 import { Inter_400Regular, Inter_500Medium } from '@expo-google-fonts/inter';
 import {
     Rajdhani_500Medium,
     Rajdhani_700Bold
 } from '@expo-google-fonts/rajdhani';
-
 import * as SplashScreen from 'expo-splash-screen';
-import { Home } from './src/screens/Home';
-import { StatusBar, View } from 'react-native';
+import * as Font from 'expo-font';
 import { Background } from './src/components/Background';
+import { Home } from './src/screens/Home';
 
-export default function App(): JSX.Element {
+export default function App() {
     const [appIsReady, setAppIsReady] = useState(false);
+
     useEffect(() => {
-        async function loadFonts() {
+        async function prepare() {
             try {
+                // Keep the splash screen visible while we fetch resources
                 await SplashScreen.preventAutoHideAsync();
+
                 await Font.loadAsync({
                     Inter_400Regular,
                     Inter_500Medium,
                     Rajdhani_500Medium,
                     Rajdhani_700Bold
                 });
-
-                await SplashScreen.preventAutoHideAsync();
-            } catch (error) {
-                console.warn('Error downloading the fonts', error);
+            } catch (e) {
+                console.warn(e);
             } finally {
+                // Tell the application to render
                 setAppIsReady(true);
             }
         }
-        loadFonts();
+
+        prepare();
     }, []);
 
     const onLayoutRootView = useCallback(async () => {
@@ -40,8 +43,12 @@ export default function App(): JSX.Element {
         }
     }, [appIsReady]);
 
+    if (!appIsReady) {
+        return null;
+    }
+
     return (
-        <View onLayout={onLayoutRootView}>
+        <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
             <Background>
                 <StatusBar
                     barStyle="light-content"
