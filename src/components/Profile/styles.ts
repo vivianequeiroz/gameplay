@@ -3,7 +3,8 @@ import { theme } from '../../global/styles/theme';
 
 export const styles = StyleSheet.create({
     container: {
-        flexDirection: 'row'
+        flexDirection: 'row',
+        alignItems: 'center'
     },
     user: {
         flexDirection: 'row'
@@ -12,7 +13,7 @@ export const styles = StyleSheet.create({
         fontFamily: theme.fonts.title500,
         color: theme.colors.heading,
         fontSize: 24,
-        marginRight: 6
+        marginLeft: -6
     },
     username: {
         fontFamily: theme.fonts.title700,
