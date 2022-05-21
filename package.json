@@ -12,6 +12,7 @@
     "dependencies": {
         "@expo-google-fonts/inter": "^0.2.2",
         "@expo-google-fonts/rajdhani": "^0.2.2",
+        "@expo/vector-icons": "^13.0.0",
         "@react-native-community/eslint-config": "^3.0.2",
         "@react-navigation/native": "^6.0.10",
         "@react-navigation/stack": "^6.2.1",
