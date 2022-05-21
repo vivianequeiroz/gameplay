@@ -8,9 +8,8 @@ import {
 } from '@expo-google-fonts/rajdhani';
 import * as SplashScreen from 'expo-splash-screen';
 import * as Font from 'expo-font';
-
-import { Background } from './src/components/Background';
 import { Routes } from './src/routes';
+import { Background } from './src/components/Background';
 
 export default function App() {
     const [appIsReady, setAppIsReady] = useState(false);

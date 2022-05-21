@@ -10,7 +10,6 @@ export function AuthRoutes() {
     return (
         <Navigator
             screenOptions={{
-                cardStyle: { backgroundColor: 'transparent' },
                 headerShown: false
             }}
         >
